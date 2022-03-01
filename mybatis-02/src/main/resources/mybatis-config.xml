@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--configuration核心配置文件-->
+
+    <!--引入外部配置文件-->
+    <properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <!--优先选择这个用户名和密码  其次选择db.properties-->
+    </properties>
+
+    <!--//可以给实体类起别名-->
+    <typeAliases>
+
+        <!--<typeAlias type="com.syr.pojo.User" alias="User"/>-->
+        <!--扫描实体类的包，它的默认别名就为这个类的类名，首字母小写-->
+        <package name="com.syr.pojo"/>
+    </typeAliases>
+
+    <environments default="test">
+        <environment id="development">
+            <transactionManager type="JDBC"><!--事务管理-->
+                <property name="..." value="..."/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+        <environment id="test">
+            <transactionManager type="JDBC"><!--事务管理-->
+                <property name="..." value="..."/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--使用相对于类路径的资源引用-->
+        <mapper resource="com/syr/dao/UserMapper.xml"/>
+        <!--使用映射器接口实现类的完全限定类名-->
+        <!--<mapper class="com.syr.dao.UserMapper"/>-->
+        <!--将包内的映射器接口实现全部注册为映射器-->
+<!--
+        <package name="com.syr.dao"/>
+-->
+    </mappers>
+
+</configuration>
+

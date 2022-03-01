@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--configuration核心配置文件-->
+
+    <!--引入外部配置文件-->
+    <properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <!--优先选择这个用户名和密码  其次选择db.properties-->
+    </properties>
+
+    <settings>
+        <!--标准的日志工厂实现-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--是否开启自动驼峰命名规则（camel case）映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!--//可以给实体类起别名-->
+    <typeAliases>
+        <package name="com.syr.pojo"/>
+    </typeAliases>
+
+    <environments default="test">
+
+        <environment id="test">
+            <transactionManager type="JDBC"><!--事务管理-->
+                <property name="..." value="..."/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--绑定接口-->
+
+    <mappers>
+        <mapper class="com.syr.dao.BlogMapper"/>
+    </mappers>
+
+</configuration>
+
